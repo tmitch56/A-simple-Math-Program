@@ -1,25 +1,49 @@
-# Fundamentals-of-Programming-A-simple-Math-Program
-Using Numbers and Strings in Java  
-This programming assignment has four objectives: to use Java variables and operators to write expressions, to understand how to manipulate Java strings and characters, to print formatted output, and to see if you can follow a specification exactly! 
-Description  
-The program 1) declares a set of variables of several different data types, 2) uses the variables to construct expressions to do some simple math, 3) manipulates strings and characters, and 4) outputs the results. 
-Instructions  For this assignment, you must follow directions exactly. Create a P2 project in Eclipse then write a class P2 with a main method, and put all of the following code into the main method: 
-Declare an integer variable of type byte, short, int, and long. Declare a floating-point variable of type float, and double. Declare three variables of type char. Declare three instance variables of the class String. Initialize the variables using an initializer or assignment statement: byte: 97, short: 24567, int: 113355, long: 9384876238 float: 1.57, double: 23.456 char: '$', 'H', '3' String: "Java", "Programming", "Great" NOTE: The long integer value exceeds 32-bits, and therefore requires special syntax. NOTE: The float value similarly requires special syntax, otherwise it will default to type double. Find the syntax referenced above for long and float literals on the web and use them. 
+Moving in a Maze
 
-(Line 1) Print the four integer values in the following order (byte,short,int,long) separated by commas. 
-(Line 2) Print the two floating-point values in the following order (float, double) separated by colons. 
-(Line 3) Print the sum of all the integer variables divided by 1000. 
-(Line 4) Print the square root of the sum of all the floating-point variables. NOTE: You may use Math.sqrt() to compute the square root. 
-(Line 5) Print the quotient of the double variable divided by the int. 
-(Line 6) Print the three characters, separated by semicolons. 
-(Line 7) Increment all three character values and print them again, separated by periods. 
-(Line 8) Using the three String variables and string constants, print Java Programming is Great!. NOTE: The following items require a String method call inside a print statement. 
-(Line 9) Print the length of all three String variables, separated by commas. 
-(Line 10) Print the third String variable in uppercase letters. 
-(Line 11) Print the third through sixth characters of the second String variable. 
-(Line 12) Print the index of the character 'v' in the first String variable. 
-(Line 13) Print the fourth character of the second String variable. 
-  
-Your program should match the output shown below, with no mispellings, wrong characters, incorrect case, or extra white space! A missing line will cause many errors, so make sure you have all of the lines below in the correct order. 
+This lab has the goal of teaching you how to:
+Read input from the user and perform error checking.
+Instantiate a Maze object and call its methods.
+See your code control user interface.
+Use control loops to manage movement in the Maze.
+Description
 
-Your program must meet the following specifications: Work on your own, as always. The name of the source code file must be exactly P2.java. Name the file exactly - upper and lower case matters! Comments at the top as shown in P1. Assignments should be implemented using Eclipse. Assignments should be implemented using Java 1.5 or 1.6 or 1.7. Make sure your code runs on machines in the COMCS 120 lab. 
+This assignment features you, the student, as the star of the show. The goal of this program is to move yourself around the maze according to a precise set of rules. If you follow the rules, you will find the Java logo . Note: You must follow the exact path we specify to receive full credit on this program, finding the Java logo is not enough!
+Instructions
+
+In Recitation 5 you should have started on P4.java. If not, follow the directions here. Leave in the code you wrote that instantiates the Maze object and retrieves the dimensions. Remove any code from the recitation that moves the student around in the maze. Then add code to implement the algorithm shown below. This will require multiple control loops, which can be either while or for statements. Here is a complete specification of the Maze methods you can call:
+// Constructor, parameter is name of maze file
+public Maze(String fileName)
+
+// Get height of maze, in rows
+public int getHeight()
+
+// Get width of maze, in columns
+public int getWidth()
+
+// Move commands, returns true if move successful, false is blocked
+public boolean moveRight()
+public boolean moveLeft()
+public boolean moveUp()
+public boolean moveDown()
+
+// Returns true when the student finds the java logo, false otherwise
+public boolean isDone()
+Algorithm
+
+The student always starts at the top left corner, that is row and column zero.
+The Java logo can be anywhere in the maze, which also contains obstacles shown as "Wrong Way" signs.
+You must traverse every row in the maze from top to bottom according to the rules below, until you find the Java logo.
+Row and column numbers are zero based, so the first row and column is index 0. the second row and column is index 1, and so on. The number zero is even.
+On even rows, you must move left to right using maze.moveRight(), on odd rows, you must move right to left using maze.moveLeft().
+After completing each row, use maze.moveDown() to proceed to the next row, until you reach the last row or find the Java logo.
+You can detect that you have encountered an obstacle by checking the return value from move methods in the Maze object, true means no obstacle, false means obstacle.
+If you run into an obstacle when moving left to right:
+Move down, right, right, and up.
+Adjustment the loop counter for the extra move right!
+If you run into an obstacle when moving right to left:
+Move down, left, left, and up.
+Adjustment the loop counter for the extra move left!
+You must know where the column and row boundaries are without trying to move past them.
+Every time you move left or right, not including when avoiding an obstacle, you must call maze.isDone() to see if you have found the Java logo.
+When you find the Java logo, you must immediately break out of all loops, and exit the program.
+There are mazes that cannot be solved using the algorithm, but we will not test your program with any of them.
